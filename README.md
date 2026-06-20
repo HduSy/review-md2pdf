@@ -1,5 +1,7 @@
 # review-md2pdf
 
+**[English](README.en.md)** · 简体中文
+
 把 **Markdown 简历**按目标岗位套上有设计观点的视觉主题，先渲染成 HTML 预览，确认后用 **Puppeteer / 真实 Chromium** 导出 **A4 矢量 PDF**（文字可选可复制、缩放保真；分页用 `@page` / `break-inside` 精确控制，不会从一行中间截断）。
 
 这是一个 [Claude Code](https://docs.claude.com/en/docs/claude-code) skill。
@@ -53,4 +55,4 @@ examples/sample-resume.md          可直接试跑的样例简历
 
 ## 许可
 
-仅供个人使用。品牌设计规范素材来自第三方仓库 [VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md)，其内容版权归各自所有者。
+[MIT](LICENSE)。品牌设计规范素材来自第三方仓库 [VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md)，其内容版权归各自所有者。
