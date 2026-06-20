@@ -1,4 +1,4 @@
-# review-md2pdf
+# resume-md2pdf
 
 **[English](README.en.md)** · 简体中文
 
