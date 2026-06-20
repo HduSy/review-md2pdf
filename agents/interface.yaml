@@ -1,0 +1,22 @@
+interface:
+  display_name: "Resume MD2PDF"
+  short_description: "Markdown resume → job-matched theme → HTML preview → A4 vector PDF"
+  default_prompt: "用 resume-md2pdf 把我的 Markdown 简历按目标岗位排好版，预览确认后转成 PDF。"
+compatibility:
+  canonical_format: "agent-skills"
+  adapter_targets:
+    - "claude"
+    - "generic"
+  activation:
+    mode: "manual"
+    paths: []
+  execution:
+    context: "inline"
+    shell: "bash"
+  trust:
+    source_tier: "local"
+    remote_inline_execution: "forbid"
+    remote_metadata_policy: "allow-metadata-only"
+  notes:
+    runtime: "Node.js (marked + puppeteer/Chromium). PDF text is vector/selectable; pagination via native @page/break-inside."
+    boundary: "Layout + PDF only. Does not rewrite or optimize resume content (use tailored-resume-generator for that). No CJK/Latin mixed-runs."

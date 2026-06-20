@@ -1,0 +1,117 @@
+/* base.css —— 简历通用排版，打印优先（A4 / 矢量文字 / 友好分页） */
+
+:root{
+  --ink:#1a1a1a;
+  --muted:#5b6470;
+  --line:#d9dde2;
+  --accent:#2b6cb0;       /* 各主题会覆盖 */
+  --bg:#ffffff;
+}
+
+/* A4 页面几何：单一定义处，Puppeteer 用 preferCSSPageSize 读取 */
+@page{ size:A4; margin:14mm 14mm; }
+
+*{ box-sizing:border-box; }
+
+html{
+  -webkit-print-color-adjust:exact;
+  print-color-adjust:exact;
+}
+
+body{
+  margin:0;
+  color:var(--ink);
+  background:#eceef1;
+  line-height:1.55;
+  font-size:10.5pt;
+  font-family:"PingFang SC","Noto Sans SC","Microsoft YaHei","Hiragino Sans GB",
+    "Source Han Sans SC","Helvetica Neue",Arial,sans-serif;
+}
+
+.resume{
+  background:var(--bg);
+  padding:14mm;          /* 屏幕预览留白；打印时由 @page margin 接管 */
+}
+
+/* —— 屏幕预览：把 A4 像一张纸一样居中展示 —— */
+@media screen{
+  body{ padding:24px; }
+  .resume{
+    width:210mm;
+    min-height:297mm;
+    margin:0 auto;
+    box-shadow:0 6px 28px rgba(0,0,0,.14);
+  }
+}
+/* —— 打印：去掉阴影/留白，交给 @page —— */
+@media print{
+  body{ background:#fff; padding:0; }
+  .resume{ width:auto; min-height:0; margin:0; padding:0; box-shadow:none; }
+}
+
+/* —— 标题层级 —— */
+.resume h1{
+  font-size:23pt;
+  line-height:1.15;
+  margin:0 0 2px;
+  letter-spacing:.5px;
+  font-weight:700;
+}
+.resume h2{
+  font-size:11.5pt;
+  margin:18px 0 7px;
+  padding-bottom:3px;
+  border-bottom:1.5px solid var(--accent);
+  color:var(--accent);
+  font-weight:700;
+}
+.resume h3{ font-size:11pt; margin:11px 0 1px; color:var(--ink); font-weight:600; }
+.resume h4,.resume h5,.resume h6{ font-size:10pt; margin:8px 0 1px; color:var(--muted); font-weight:600; }
+
+.resume p{ margin:4px 0; }
+.resume ul,.resume ol{ margin:4px 0; padding-left:18px; }
+.resume li{ margin:2px 0; }
+.resume a{ color:var(--accent); text-decoration:none; }
+.resume strong{ color:#111; font-weight:600; }
+.resume em{ color:var(--ink); }
+.resume hr{ border:0; border-top:1px solid var(--line); margin:12px 0; }
+.resume code{
+  font-family:"SF Mono","Menlo","Consolas",monospace;
+  font-size:9.5pt; background:#f4f6f8; padding:0 4px; border-radius:3px;
+}
+.resume blockquote{ margin:6px 0; padding:2px 12px; color:var(--muted); border-left:3px solid var(--line); }
+
+/* Lucide 图标（仅在 build_html --icons 时出现）。
+   关键：内联 SVG 必须显式定尺寸，否则替换元素默认按 300x150px 渲染，会把整行撑爆。 */
+.resume .lucide{
+  width:1em; height:1em;
+  flex:0 0 auto;
+  vertical-align:-0.14em;
+}
+.resume .contact-item{
+  display:inline-flex;
+  align-items:center;
+  gap:.34em;
+  white-space:nowrap;   /* 图标与其文字不被拆到两行 */
+}
+
+/* 名字下方第一行通常是联系方式，弱化处理 */
+.resume > h1 + p,
+.resume > p:first-of-type{ color:var(--muted); font-size:9.5pt; }
+
+/* ===== 分页规则：禁止生硬截断 ===== */
+/* 标题不孤悬在页底，必须带后续内容 */
+h1,h2,h3,h4,h5,h6{
+  break-after:avoid;
+  page-break-after:avoid;
+  break-inside:avoid;
+}
+/* 列表项 / 引用 / 代码块 / 表格不被腰斩 */
+li,blockquote,pre,table,figure,.r-entry{
+  break-inside:avoid;
+  page-break-inside:avoid;
+}
+/* 段落：短段落整体不被拆开，避免从一行中间截断；万不得已断页时用 widows/orphans 兜底 */
+p{ orphans:3; widows:3; break-inside:avoid; page-break-inside:avoid; }
+/* 条目之间不在尴尬位置断页 */
+.r-entry{ margin-top:2px; }

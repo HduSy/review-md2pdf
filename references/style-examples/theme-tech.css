@@ -1,0 +1,15 @@
+/* theme-tech.css —— 技术/工程岗：紧凑、理性、一抹工程蓝 */
+.theme-tech{ --accent:#1f6feb; }
+
+.theme-tech .resume{
+  font-size:10pt;
+  line-height:1.5;
+  font-family:"PingFang SC","Noto Sans SC","SF Pro Text","Helvetica Neue",Arial,sans-serif;
+}
+.theme-tech h1{ font-size:21pt; color:#0d2b45; letter-spacing:.3px; }
+.theme-tech h2{
+  border-bottom:2px solid var(--accent);
+  letter-spacing:.4px;
+}
+.theme-tech h3{ color:#15324f; }
+.theme-tech code{ color:#1f6feb; }

@@ -1,0 +1,13 @@
+/* theme-creative.css —— 设计/产品/市场岗：现代、有温度、暖色重点 */
+.theme-creative{ --accent:#e0531f; }
+
+.theme-creative .resume{ font-size:10.5pt; }
+.theme-creative h1{ font-size:24pt; letter-spacing:.5px; color:#241a14; }
+.theme-creative h2{
+  border-bottom:none;
+  border-left:4px solid var(--accent);
+  padding:1px 0 3px 9px;
+}
+.theme-creative h3{ color:#3a2418; }
+.theme-creative a{ border-bottom:1px solid var(--accent); }
+.theme-creative strong{ color:#7a2d10; }

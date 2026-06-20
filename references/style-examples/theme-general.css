@@ -1,0 +1,6 @@
+/* theme-general.css —— 默认通用风：克制、平衡、百搭 */
+.theme-general{ --accent:#2b6cb0; }
+
+.theme-general .resume{ font-size:10.5pt; }
+.theme-general h1{ color:#16222e; }
+.theme-general h2{ border-bottom:1.5px solid var(--accent); }

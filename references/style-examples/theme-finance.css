@@ -1,0 +1,17 @@
+/* theme-finance.css —— 金融/咨询/法务岗：稳重、衬线、藏青 */
+.theme-finance{ --accent:#1a365d; }
+
+.theme-finance .resume{
+  font-size:10.5pt;
+  font-family:"Source Han Serif SC","Noto Serif SC","Songti SC",
+    "Times New Roman","PingFang SC",serif;
+}
+.theme-finance h1{ font-size:22pt; letter-spacing:1px; color:#102a4c; }
+.theme-finance h2{
+  border-bottom:1px solid var(--accent);
+  text-transform:uppercase;
+  font-size:11pt;
+  letter-spacing:1.2px;
+}
+.theme-finance h3{ color:#16365c; }
+.theme-finance strong{ color:#000; }

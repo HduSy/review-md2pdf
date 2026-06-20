@@ -1,0 +1,15 @@
+# 依赖（含 Chromium，约 47MB，由 `npm install` 重新生成）
+node_modules/
+
+# 运行时工作产物
+.resume-theme.css
+.brand-design.md
+resume.html
+resume.pdf
+*.log
+
+# 临时/调试脚本
+_*.mjs
+
+# OS
+.DS_Store
