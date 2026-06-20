@@ -4,7 +4,7 @@ English · **[简体中文](README.md)**
 
 Turn a **Markdown résumé** into a polished, role-tailored PDF: apply an opinionated visual theme, preview it as HTML, then export an **A4 vector PDF** with **Puppeteer / real Chromium** (selectable & copyable text, crisp at any zoom; pagination controlled precisely via `@page` / `break-inside` so lines are never cut mid-row).
 
-This is a [Claude Code](https://docs.claude.com/en/docs/claude-code) skill.
+At its core are three independent Node scripts (`build_html` / `check_theme` / `render_pdf`) that run from the command line — tool- and platform-agnostic. The only step that involves an AI assistant is *designing a visual theme for this résumé on the spot*; you can let an AI coding agent (e.g. Claude Code) do it, or hand-write a theme CSS yourself.
 
 ## Scope
 
@@ -16,7 +16,7 @@ This is a [Claude Code](https://docs.claude.com/en/docs/claude-code) skill.
 1. **Identify the target role** (user-stated > inferred from the résumé > generic default), confirm language.
 2. **Pick a theme style** (asked before generating HTML):
    - **Brand design style** — based on the 67 brands in [awesome-design-md](https://github.com/VoltAgent/awesome-design-md) (Stripe / Apple / Linear / Notion / Claude …): `curl` that brand's `DESIGN.md`, distill its palette/typography/mood into a résumé theme. See `references/brand-styles.md`.
-   - **Freeform design** — invoke the `frontend-design` skill to design on the spot. See `references/theme-design-guide.md`.
+   - **Freeform design** — let an AI coding agent (e.g. Claude Code's `frontend-design` skill) design one on the spot, or hand-write a theme CSS yourself against the constraints. See `references/theme-design-guide.md`.
 3. **Validate the theme**: `node scripts/check_theme.mjs .resume-theme.css` (blocks pagination overrides / missing `--accent` / image backgrounds, etc.).
 4. **Generate HTML preview** (opens in browser): `node scripts/build_html.mjs --in resume.md --theme-css .resume-theme.css --lang zh-CN [--icons]`.
 5. **Export PDF after the user approves**: `node scripts/render_pdf.mjs --in resume.html --out resume.pdf`.

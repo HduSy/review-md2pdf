@@ -4,7 +4,7 @@
 
 把 **Markdown 简历**按目标岗位套上有设计观点的视觉主题，先渲染成 HTML 预览，确认后用 **Puppeteer / 真实 Chromium** 导出 **A4 矢量 PDF**（文字可选可复制、缩放保真；分页用 `@page` / `break-inside` 精确控制，不会从一行中间截断）。
 
-这是一个 [Claude Code](https://docs.claude.com/en/docs/claude-code) skill。
+核心是三个互相独立的 Node 脚本（`build_html` / `check_theme` / `render_pdf`），纯命令行即可跑通，不绑定任何特定工具或平台。唯一用到 AI 助手的地方是「为这份简历现场设计一套视觉主题」——这一步既可以交给 AI 编码助手（如 Claude Code），也可以自己手写一份主题 CSS。
 
 ## 能力边界
 
@@ -16,7 +16,7 @@
 1. **定位目标岗位**（用户明说 > 从简历推断 > 默认通用），确认语言。
 2. **选主题风格**（生成 HTML 前先问）：
    - **品牌设计风格** —— 基于 [awesome-design-md](https://github.com/VoltAgent/awesome-design-md) 的 67 个知名品牌（Stripe / Apple / Linear / Notion / Claude …），`curl` 取该品牌 `DESIGN.md`，提炼配色/字体/气质转成简历主题。见 `references/brand-styles.md`。
-   - **自由设计** —— 调用 `frontend-design` skill 现场设计。见 `references/theme-design-guide.md`。
+   - **自由设计** —— 让 AI 编码助手（如 Claude Code 的 `frontend-design` skill）现场设计，或自己按约束手写一份主题 CSS。见 `references/theme-design-guide.md`。
 3. **校验主题**：`node scripts/check_theme.mjs .resume-theme.css`（拦截改分页 / 缺 `--accent` / 图片背景等违规）。
 4. **生成 HTML 预览**（自动开浏览器）：`node scripts/build_html.mjs --in resume.md --theme-css .resume-theme.css --lang zh-CN [--icons]`。
 5. **用户确认后导出 PDF**：`node scripts/render_pdf.mjs --in resume.html --out resume.pdf`。
