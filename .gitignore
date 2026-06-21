@@ -8,6 +8,10 @@ resume.html
 resume.pdf
 *.log
 
+# 示例渲染产物（examples/frontend-resume/ 是 frontend-resume.md 的可再生产出，
+# 其带前缀的文件名不在上面的默认模式内）
+examples/frontend-resume/
+
 # 临时/调试脚本
 _*.mjs
 
