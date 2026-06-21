@@ -19,7 +19,7 @@ metadata:
 1. **定位目标岗位**：用户明说 > 从简历推断 > 默认通用。确认语言（默认 `zh-CN`）。
 2. **选风格**（生成 HTML 前先问）：按目标岗位从 [品牌风格库](references/brand-styles.md) 推荐 3-4 个贴合的知名品牌设计风格，用 AskUserQuestion 让用户挑，并附「都不要 → 让我自由设计」选项；用户也可点名清单里任意品牌。
    - **选了某品牌** → `curl` 抓该品牌 `DESIGN.md`，提炼配色/字体/气质，转化为符合本管线约束的简历主题（细节见 [品牌风格库](references/brand-styles.md)）。
-   - **没有心仪的 / 默认** → 用 Skill 工具调用 `frontend-design` 自由设计（带上岗位+简历气质+硬约束，prompt 模板见 [主题设计指南](references/theme-design-guide.md)）。
+   - **没有心仪的 / 默认** → 用 Skill 工具调用 `frontend-design` 自由设计（带上岗位+简历气质+硬约束，prompt 模板见 [主题设计指南](references/theme-design-guide.md)）。若 `frontend-design` 不在「可用 skills」列表，先装：`npx skills add https://github.com/anthropics/skills --skill frontend-design`，再调用；只有装不上的极端情况才降级为手写主题。
    - 两条路都**不套固定模板**，产出写入工作目录 `.resume-theme.css`。
 3. **校验主题**（拦截违规，必过）：
    ```bash
@@ -73,6 +73,7 @@ cd ~/.claude/skills/resume-md2pdf/scripts && npm install
 
 - HTML 预览（自动打开）→ 用户确认 → A4 矢量 PDF。
 - 内容忠于原文；视觉为当前岗位定制；分页干净、文字可选可复制。
+- 不传 `--out` 时，HTML 与 PDF 默认输出到桌面（macOS `~/Desktop`、Windows 同理；显式 `--out` 仍优先生效）。
 
 ## 下一步（按需，复用增长后再加）
 

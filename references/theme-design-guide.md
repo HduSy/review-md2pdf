@@ -9,12 +9,17 @@
 ## 流程（核心）
 
 1. **读简历 + 定位岗位**：用户明说 > 从简历推断 > 默认通用。顺带提炼简历气质（技术/金融/设计/学术…、信息密度、有无亮点）。
-2. **用 Skill 工具调用 `frontend-design`**，prompt 用下面的模板填好（带上岗位、气质、结构说明、硬约束）。
-3. **把它产出的 CSS 写入** 工作目录 `.resume-theme.css`。
-4. **校验**：`node ~/.claude/skills/resume-md2pdf/scripts/check_theme.mjs .resume-theme.css`。非 0 退出 → 把报错贴回给 frontend-design 让它修，或手动改，重校直到通过。
-5. 通过后作为 `--theme-css` 传给 `build_html.mjs`。
+2. **确认 `frontend-design` 已装可用**（自由设计的质量依赖它）：看当前会话「可用 skills」列表里有没有 `frontend-design`；**没有就先装**：
+   ```bash
+   npx skills add https://github.com/anthropics/skills --skill frontend-design
+   ```
+   非交互场景加 `-y` 跳过确认：`npx -y skills add anthropics/skills --skill frontend-design -y`。装好后它会进入可用列表，再继续。
+3. **用 Skill 工具调用 `frontend-design`**，prompt 用下面的模板填好（带上岗位、气质、结构说明、硬约束）。
+4. **把它产出的 CSS 写入** 工作目录 `.resume-theme.css`。
+5. **校验**：`node ~/.claude/skills/resume-md2pdf/scripts/check_theme.mjs .resume-theme.css`。非 0 退出 → 把报错贴回给 frontend-design 让它修，或手动改，重校直到通过。
+6. 通过后作为 `--theme-css` 传给 `build_html.mjs`。
 
-> 若 `frontend-design` 不可用（未安装/无法加载），降级为：你（Claude）亲自按下面的「设计维度」合成一份 CSS，同样跑 `check_theme.mjs` 校验。质量会弱一些，但流程不变。
+> **降级（最后手段）**：仅当 `frontend-design` 装不上（网络/权限，或装完本会话仍无法加载）时，才由你（Claude）亲自按下面的「设计维度」合成一份 CSS，同样跑 `check_theme.mjs` 校验。质量会弱一些，但流程不变。
 
 ## 调用 frontend-design 的 prompt 模板
 
